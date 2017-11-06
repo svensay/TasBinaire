@@ -55,9 +55,6 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
      */
     //@Override
     public boolean offer(E e) {
-	/*if(e instanceof E){
-	    System.out.println("ajout impossible");
-	    }*/
 	if (courant >= max) {
 	    System.out.println("Plus de place: nombre élement = " + courant + "; capacité = " + max);
 	    return false;
@@ -137,7 +134,6 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
      */
     //@Override
     public QueueExt<E> filtre(Predicate<E> cond){
-        System.out.println("FILTRE");
 	ArrayList<E> tmp = new ArrayList<E>();
 	for(int i = 0; i < courant; i++){
 	    if(cond.test(tas[i])) tmp.add(tas[i]);
@@ -154,7 +150,15 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
      */
     //@Override
     public <U> QueueExt<U> map(Function<E, U> f){
-	return null;
+        QueueExt<U> res = new TBQueue<U>(new Comparator(){
+            public int compare(Object x, Object y){
+                return comp.compare((E)x, (E)y);
+            }
+        },max);
+        for(int i = 0; i < courant;i++){
+            res.offer(f.apply(tas[i]));
+        }
+	return res;
     }
     
     /**

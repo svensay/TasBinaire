@@ -7,13 +7,7 @@ public class Main {
     public static void main(String[] args) {
         TBQueue<Integer> t = new TBQueue<Integer>(new Comparator() {
             public int compare(Object x, Object y) {
-                if ((Integer) x > (Integer) y) {
-                    return 1;
-                } else if ((Integer) x < (Integer) y) {
-                    return -1;
-                }else{
-                    return 0;
-                }
+               return ((Integer)x).compareTo((Integer)y);
             }
         }, 10);
         System.out.println(t.offer(2));
@@ -41,6 +35,13 @@ public class Main {
         QueueExt<Integer> fil = t.filtre((Integer x) -> x.intValue() >= 1 && x.intValue() <= 5);
         System.out.println("Filre : ");
         for (Object x : fil) {
+            System.out.print(x + " ");
+        }
+        System.out.println();
+        
+        QueueExt<Integer> map = t.map((Integer x) -> {return x+5;});
+        System.out.println("Map : ");
+        for (Object x : map) {
             System.out.print(x + " ");
         }
         System.out.println();

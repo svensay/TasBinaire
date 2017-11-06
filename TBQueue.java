@@ -12,7 +12,7 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
     private Comparator<? super E> comp;
     private int courant = 0;
     private int max;
-
+        
     public TBQueue(Comparator<? super E> c,int max) {
 	comp = c;
 	tas = (E[]) new Object[max];
@@ -20,7 +20,6 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
     }
 
     //@Override
-    @SuppressWarnings("unchecked")
     public Iterator<E> iterator() {
 	return new Iterator<E>() {
 	    private int n = -1;
@@ -135,12 +134,13 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
     //@Override
     public QueueExt<E> filtre(Predicate<E> cond){
 	ArrayList<E> tmp = new ArrayList<E>();
-	for(int i = 0; i < courant; i++){
-	    if(cond.test(tas[i])) tmp.add(tas[i]);
+	for(E x:this){
+	    if(cond.test(x)) tmp.add(x);
 	}
 	QueueExt<E> res = new TBQueue<E>(comp,tmp.size());
-	for(int i = 0 ; i < tmp.size(); i++){
-	    res.offer(tmp.get(i));
+        
+	for(E x:tmp){
+	    res.offer(x);
 	}
 	return res;
     }
@@ -150,13 +150,13 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
      */
     //@Override
     public <U> QueueExt<U> map(Function<E, U> f){
-        QueueExt<U> res = new TBQueue<U>(new Comparator(){
-            public int compare(Object x, Object y){
-                return comp.compare((E)x, (E)y);
+        QueueExt<U> res = new TBQueue<U>(new Comparator<U>(){
+            public int compare(U x, U y){
+                return comp.compare((E)x,(E)y);
             }
         },max);
-        for(int i = 0; i < courant;i++){
-            res.offer(f.apply(tas[i]));
+        for(E x: this){
+            res.offer(f.apply(x));
         }
 	return res;
     }
@@ -166,7 +166,10 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
      */
     //@Override
     public Optional<E> trouve(Predicate<E> cond){
-	return null;
+        for (E x:this) {
+            if(cond.test(x)) return Optional.of(x);
+        }
+	return Optional.empty();
     }
 
     /**
@@ -176,7 +179,11 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
 
     //@Override
     public <U> U reduit(U z, BiFunction<U, E, U> f){
-	return null;
+        U acc = z;
+        for (E x:this) {
+            acc = f.apply(acc, x);
+        }
+	return acc;
     }
 
     public void affiche() {

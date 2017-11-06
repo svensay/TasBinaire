@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.function.*;
 
-public class TBQueue<E extends Comparable<? super E>> extends AbstractQueue<E>  implements QueueExt<E>{
+public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
 
     /*
       Racine indice 0
@@ -55,7 +55,7 @@ public class TBQueue<E extends Comparable<? super E>> extends AbstractQueue<E>  
      */
     //@Override
     public boolean offer(E e) {
-	/*	if(!(e instanceof E)){
+	/*if(e instanceof E){
 	    System.out.println("ajout impossible");
 	    }*/
 	if (courant >= max) {
@@ -64,7 +64,7 @@ public class TBQueue<E extends Comparable<? super E>> extends AbstractQueue<E>  
 	}
 	tas[courant] =  e;
 	int i = courant;
-	while (i >= 0 && (comp.compare(tas[(i - 1) / 2],tas[i]) < 0)) {
+	while (i >= 0 && ((i - 1) / 2) >= 0 && tas[(i - 1) / 2] != null && (comp.compare(tas[(i - 1) / 2],tas[i]) < 0)) {
 	    E tmp = tas[(i - 1) / 2];
 	    tas[(i - 1) / 2] = tas[i];
 	    tas[i] = tmp;
@@ -89,12 +89,6 @@ public class TBQueue<E extends Comparable<? super E>> extends AbstractQueue<E>  
 	tas[courant - 1] = null;
 	courant--;
 	int i = 0;
-	
-	/*
-	  Racine indice 0
-	  fils gauche de l'indice i => 2i+1 et son fils droit => 2i+2
-	  i > 0 pere gauche => i-1/2
-	*/
 	while (((((2 * i) + 1) < max && tas[(2 * i) + 1] != null)
 		|| (((2 * i) + 2) < max && tas[(2 * i) + 2] != null))){
 	    E tmp = tas[i];
@@ -143,11 +137,12 @@ public class TBQueue<E extends Comparable<? super E>> extends AbstractQueue<E>  
      */
     //@Override
     public QueueExt<E> filtre(Predicate<E> cond){
+        System.out.println("FILTRE");
 	ArrayList<E> tmp = new ArrayList<E>();
 	for(int i = 0; i < courant; i++){
 	    if(cond.test(tas[i])) tmp.add(tas[i]);
 	}
-	QueueExt<E> res = new TBQueue<E>(null,tmp.size());
+	QueueExt<E> res = new TBQueue<E>(comp,tmp.size());
 	for(int i = 0 ; i < tmp.size(); i++){
 	    res.offer(tmp.get(i));
 	}

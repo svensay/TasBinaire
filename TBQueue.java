@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.function.*;
+import java.lang.*;
 
 public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
 
@@ -15,7 +16,9 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
         
     public TBQueue(Comparator<? super E> c,int max) {
 	comp = c;
-	tas = (E[]) new Object[max];
+		tas = (E[]) new Object[max];	
+	
+		System.out.println("ICIII" + tas.getClass().getSimpleName() + "FINI");
 	this.max = max;
     }
 
@@ -152,7 +155,12 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
     public <U> QueueExt<U> map(Function<E, U> f){
         QueueExt<U> res = new TBQueue<U>(new Comparator<U>(){
             public int compare(U x, U y){
-                return comp.compare((E)x,(E)y);
+            	System.out.println("X:"+x.getClass().getSimpleName()+":X Y:"+y.getClass().getSimpleName()+":Y");
+                try{
+                	return comp.compare((E)x,(E)y);
+                } catch(ClassCastException e){
+                	throw e;
+                }
             }
         },max);
         for(E x: this){

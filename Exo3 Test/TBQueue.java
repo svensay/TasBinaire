@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.function.*;
 import java.lang.*;
 import java.lang.Class.*;
-//https://docs.oracle.com/javase/7/docs/api/java/lang/Class.html
+
 public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
 
     /*
@@ -10,17 +10,16 @@ public class TBQueue<E> extends AbstractQueue<E>  implements QueueExt<E>{
       fils gauche de l'indice i => 2i+1 et son fils droit => 2i+2
       i > 0 pere gauche => i-1/2
     */
-    private E[] tas;
+    private List<E[]> tas;
     private Comparator<? super E> comp;
     private int courant = 0;
-    private int max;
         
-    public TBQueue(Comparator<? super E> c,int max) {
+    public TBQueue(Comparator<? super E> c) {
 		comp = c;
 		// Class<E> aux[];
 		// Object tmp[] = new Object[max];
 		// tas = tmp.getComponentType();	
-		tas = (E[]) new Object[max];
+		tas = (E[]) new ArrayList<Object[]>;
 		System.out.println("ICIII" + tas.getClass().getSimpleName() + "FINI");
 		this.max = max;
     }

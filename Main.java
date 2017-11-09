@@ -74,5 +74,7 @@ public class Main {
         System.out.println(g.poll());
         System.out.print("Tas(int) aprés suppression : ");
         g.affiche();
+
+        System.out.println("Coucou Sven");
     }
 }

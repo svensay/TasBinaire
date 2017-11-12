@@ -37,7 +37,8 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             }
 
             public E next() {
-                return tas[n];
+                // return tas[n];
+                return tas.get(niveau)[n - tailleDuTableauAuNiveau(niveau)];
             }
 
             public void remove() {
@@ -132,6 +133,10 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
         return true;
     }
 
+    public E poll(){
+        return tas.get(0)[0];
+    }
+
     // /**
     //  *
     //  * @return la tete de la queue et l'enleve
@@ -181,14 +186,15 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     //     return res;
     // }
 
-    // /**
-    //  *
-    //  * @return la tete de la queue
-    //  */
-    // //@Override
-    // public E peek() {
-    //     return tas[0];
-    // }
+    /**
+     *
+     * @return la tete de la queue
+     */
+    //@Override
+    public E peek() {
+        return tas.get(0)[0];
+        // return tas[0];
+    }
 
     // /**
     //  * @return une nouvelle liste consistant en les éléments de tab qui
@@ -248,20 +254,20 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     //     return Optional.empty();
     // }
 
-    // /**
-    //  * Initialise un accumulateur a avec z, puis, pour chaque élément x de this,
-    //  * calcule a = f (a, x).
-    //  *
-    //  * @return a
-    //  */
-    // //@Override
-    // public <U> U reduit(U z, BiFunction<U, E, U> f) {
-    //     U acc = z;
-    //     for (E x : this) {
-    //         acc = f.apply(acc, x);
-    //     }
-    //     return acc;
-    // }
+    /**
+     * Initialise un accumulateur a avec z, puis, pour chaque élément x de this,
+     * calcule a = f (a, x).
+     *
+     * @return a
+     */
+    //@Override
+    public <U> U reduit(U z, BiFunction<U, E, U> f) {
+        U acc = z;
+        for (E x : this) {
+            acc = f.apply(acc, x);
+        }
+        return acc;
+    }
 
     public void affiche() {
         if (courant <= 0) {

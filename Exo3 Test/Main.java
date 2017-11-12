@@ -44,7 +44,7 @@ public class Main {
             public int compare(Integer x, Integer y) {
                 return x.compareTo(y);
             }
-        }, 10);
+        });
         System.out.println(t.offer(2));
         System.out.println(t.offer(6));
         System.out.println(t.offer(20));
@@ -55,11 +55,11 @@ public class Main {
         System.out.println(t.offer(54));
         System.out.print("Tas(int) aprés ajout : ");
         t.affiche();
-        System.out.println(t.poll());
-        System.out.println(t.poll());
-        System.out.println(t.poll());
-        System.out.print("Tas(int) aprés suppression : ");
-        t.affiche();
+        // System.out.println(t.poll());
+        // System.out.println(t.poll());
+        // System.out.println(t.poll());
+        // System.out.print("Tas(int) aprés suppression : ");
+        // t.affiche();
 
         // //TEST D'ITERATION
         // System.out.print("Test d'iteration : ");

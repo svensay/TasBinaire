@@ -46,7 +46,7 @@ public class Main {
             }
         });
         System.out.println(t.offer(2));
-        // System.out.println(t.offer(6));
+        System.out.println(t.offer(6));
         // System.out.println(t.offer(20));
         // System.out.println(t.offer(85));
         // System.out.println(t.offer(7));

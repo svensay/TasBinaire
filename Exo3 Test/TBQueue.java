@@ -113,22 +113,36 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
        	int niveauTmp = niveau;	// pour remonter dans la liste
         int i = courant;
         // while (i >= 0 && ((i - 1) / 2) >= 0 && tas[(i - 1) / 2] != null && (comp.compare(tas[(i - 1) / 2], tas[i]) < 0)) {
-        while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] != null && (comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveau))/2], tas.get(niveau)[i]) < 0)) {
+        System.out.println("1TEST-->"+(i-tailleDuTableauAuNiveau(niveauTmp))/2);
+        if (niveauTmp-1 >= 0) {
+            System.out.println("2TEST-->"+(tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] + "  niveauTmp = " + niveauTmp + ", i = "+i+" tailleDuTableauAu(Niveau) = "+ tailleDuTableauAuNiveau(niveauTmp));
+            System.out.println("3TEST-->"+(tas.get(niveauTmp))[(i - tailleDuTableauAuNiveau(niveauTmp)) * (-1) -1]);    // L'adresse du fils
+            // && (comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveau)[i - tailleDuTableauAuNiveau(niveauTmp)]) < 0)
+        }
+        while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] != null) {
         	// La formule pour trouver le pere dans une liste de tableau : Pere = (courant-tailleDuTableauAuNiveau(niveau)) / 2; Exemple: courant = 11, tailleDu...(niveau) = 8 -> (11-8)/2 = 1 et 1 etant l'indice dans lequel se trouve le pere dans le niveau au dessus.
-            
-            // E tmp = tas[(i - 1) / 2];
-            // tas[(i - 1) / 2] = tas[i];
-            // tas[i] = tmp;
-            // i = (i - 1) / 2;
-            
-            E tmp = tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2];
-            tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2] = tas.get(niveauTmp)[i-tailleDuTableauAuNiveau(niveauTmp)];
+            int indiceDuFils = i - tailleDuTableauAuNiveau(niveauTmp);
+            if (indiceDuFils < 0) {
+                indiceDuFils*=(-1);
+            }
+            System.out.println("3.5TEST-->indiceDuFils-1 = " + (indiceDuFils-1));
+            System.out.println("4TEST-->" + tas.get(niveauTmp)[indiceDuFils-1]);
+            if ((comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils-1]) < 0)) {
+                
+                // E tmp = tas[(i - 1) / 2];
+                // tas[(i - 1) / 2] = tas[i];
+                // tas[i] = tmp;
+                // i = (i - 1) / 2;
+                
+                E tmp = tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2];
+                tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2] = tas.get(niveauTmp)[indiceDuFils-1];
 
 
-            // E[] tmp = tas.set((i-tailleDuTableauAuNiveau(niveauTmp))/2, tas.get(tailleDuTableauAuNiveau(niveauTmp)-i));
-            // tmp = tas.set(i-tailleDuTableauAuNiveau(niveauTmp), tmp);
-			i = (i - 1) / 2;
-            niveauTmp--;	// On remonte
+                // E[] tmp = tas.set((i-tailleDuTableauAuNiveau(niveauTmp))/2, tas.get(tailleDuTableauAuNiveau(niveauTmp)-i));
+                // tmp = tas.set(i-tailleDuTableauAuNiveau(niveauTmp), tmp);
+    			i = (i - 1) / 2;
+                niveauTmp--;	// On remonte
+            }
         }
         courant++;
         return true;

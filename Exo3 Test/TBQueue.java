@@ -23,6 +23,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
         // Object tmp[] = new Object[max];
         // tas = tmp.getComponentType();
 		tas = new ArrayList<E[]>();
+        tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
         System.out.println("ICIII" + tas.getClass().getSimpleName() + "FINI");
     }
 
@@ -63,7 +64,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      */
     public boolean tasFull(){
 		int tmp = 1;
-		for (int i = 0; i < niveau+1; i++) {
+		for (int i = 0; i <= niveau; i++) {
 			tmp*=2;
 		}
 		return tmp - 1 == courant;
@@ -275,7 +276,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             return;
         }
         System.out.print("[");
-        for (int i = 0; i < niveau; i++) {
+        for (int i = 0; i <= niveau; i++) {
         	for (int j = 0; j <  tas.get(i).length; j++) {
 	            System.out.print("\"" + (tas.get(i))[j] + "\" ");   		
         	}

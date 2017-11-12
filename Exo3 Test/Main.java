@@ -46,13 +46,13 @@ public class Main {
             }
         });
         System.out.println(t.offer(2));
-        System.out.println(t.offer(6));
-        System.out.println(t.offer(20));
-        System.out.println(t.offer(85));
-        System.out.println(t.offer(7));
-        System.out.println(t.offer(47));
-        System.out.println(t.offer(4));
-        System.out.println(t.offer(54));
+        // System.out.println(t.offer(6));
+        // System.out.println(t.offer(20));
+        // System.out.println(t.offer(85));
+        // System.out.println(t.offer(7));
+        // System.out.println(t.offer(47));
+        // System.out.println(t.offer(4));
+        // System.out.println(t.offer(54));
         System.out.print("Tas(int) aprés ajout : ");
         t.affiche();
         // System.out.println(t.poll());

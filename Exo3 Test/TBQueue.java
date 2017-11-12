@@ -12,39 +12,38 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
       fils gauche de l'indice i => 2i+1 et son fils droit => 2i+2
       i > 0 pere gauche => i-1/2
      */
-	private List<E[]> tas;
+	private ArrayList<E[]> tas;
     private Comparator<? super E> comp;
     private int courant = 0;
 	private int niveau = 0;
 
-    public TBQueue(Comparator<? super E> c, int max) throws ClassCastException {
+    public TBQueue(Comparator<? super E> c) throws ClassCastException {
         comp = c;
         // Class<E> aux[];
         // Object tmp[] = new Object[max];
         // tas = tmp.getComponentType();
-		tas = new ArrayList<((E[])Object[])>;
+		tas = new ArrayList<E[]>();
         System.out.println("ICIII" + tas.getClass().getSimpleName() + "FINI");
-        this.max = max;
     }
 
-    //@Override
-    public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private int n = -1;
+    // //@Override
+    // public Iterator<E> iterator() {
+    //     return new Iterator<E>() {
+    //         private int n = -1;
 
-            public boolean hasNext() {
-                n++;
-                return (n < courant);
-            }
+    //         public boolean hasNext() {
+    //             n++;
+    //             return (n < courant);
+    //         }
 
-            public E next() {
-                return tas[n];
-            }
+    //         public E next() {
+    //             return tas[n];
+    //         }
 
-            public void remove() {
-            }
-        };
-    }
+    //         public void remove() {
+    //         }
+    //     };
+    // }
 
     /**
      *
@@ -120,9 +119,8 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             // tas[i] = tmp;
             // i = (i - 1) / 2;
             
-            E tmp = (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2];
-            tas.set((i-tailleDuTableauAuNiveau(niveauTmp))/2, tas.get(tailleDuTableauAuNiveau(niveauTmp)-i));	// 	set(int index, E element)
-            tas.set(tailleDuTableauAuNiveau(niveauTmp)-i), tmp);
+            E[] tmp = tas.set((i-tailleDuTableauAuNiveau(niveauTmp))/2, tas.get(tailleDuTableauAuNiveau(niveauTmp)-i));
+            tmp = tas.set(tailleDuTableauAuNiveau(niveauTmp)-i, tmp);
 			i = (i - 1) / 2;
             niveauTmp--;	// On remonte
         }

@@ -61,55 +61,55 @@ public class Main {
         System.out.print("Tas(int) aprés suppression : ");
         t.affiche();
 
-        //TEST D'ITERATION
-        System.out.print("Test d'iteration : ");
-        for (Object i : t) {
-            System.out.print(i + " ");
-        }
-        System.out.println();
+        // //TEST D'ITERATION
+        // System.out.print("Test d'iteration : ");
+        // for (Object i : t) {
+        //     System.out.print(i + " ");
+        // }
+        // System.out.println();
 
-        //TEST DE LA METHODE "FILTRE"
-        QueueExt<Integer> fil = t.filtre((Integer x) -> x.intValue() >= 1 && x.intValue() <= 5);
-        System.out.print("Filre : ");
-        for (Object x : fil) {
-            System.out.print(x + " ");
-        }
-        System.out.println();
+        // //TEST DE LA METHODE "FILTRE"
+        // QueueExt<Integer> fil = t.filtre((Integer x) -> x.intValue() >= 1 && x.intValue() <= 5);
+        // System.out.print("Filre : ");
+        // for (Object x : fil) {
+        //     System.out.print(x + " ");
+        // }
+        // System.out.println();
 
-        //TEST DE LA METHODE "MAP"
-        QueueExt<Integer> map = t.map((Integer x) -> {
-            return x + 5;
-        });
-        System.out.print("Map : ");
-        for (Object x : map) {
-            System.out.print(x + " ");
-        }
-        System.out.println();
-        //TEST DE LA METHODE "TROUVE"
-        System.out.println("Trouve : " + t.trouve((Integer x) -> x <= 4));
+        // //TEST DE LA METHODE "MAP"
+        // QueueExt<Integer> map = t.map((Integer x) -> {
+        //     return x + 5;
+        // });
+        // System.out.print("Map : ");
+        // for (Object x : map) {
+        //     System.out.print(x + " ");
+        // }
+        // System.out.println();
+        // //TEST DE LA METHODE "TROUVE"
+        // System.out.println("Trouve : " + t.trouve((Integer x) -> x <= 4));
 
-        //TEST DE LA METHODE "REDUIT"
-        System.out.println("Reduit : " + t.reduit(0, (Integer x, Integer y) -> x + y));
+        // //TEST DE LA METHODE "REDUIT"
+        // System.out.println("Reduit : " + t.reduit(0, (Integer x, Integer y) -> x + y));
 
-        // TEST AVEC UN TAS DE STRING
-        TBQueue<String> g = new TBQueue<String>(new Comparator<String>() {
-            public int compare(String x, String y) {
-                return x.compareTo(y);
-            }
-        }, 10);
-        System.out.println(g.offer("a"));
-        System.out.println(g.offer("bb"));
-        System.out.println(g.offer("cb"));
-        System.out.println(g.offer("zb"));
-        System.out.print("Tas(int) aprés ajout : ");
-        g.affiche();
-        System.out.println(g.poll());
-        System.out.println(g.poll());
-        System.out.println(g.poll());
-        System.out.println(g.poll());
-        System.out.println(g.poll());
-        System.out.print("Tas(int) aprés suppression : ");
-        g.affiche();
+        // // TEST AVEC UN TAS DE STRING
+        // TBQueue<String> g = new TBQueue<String>(new Comparator<String>() {
+        //     public int compare(String x, String y) {
+        //         return x.compareTo(y);
+        //     }
+        // }, 10);
+        // System.out.println(g.offer("a"));
+        // System.out.println(g.offer("bb"));
+        // System.out.println(g.offer("cb"));
+        // System.out.println(g.offer("zb"));
+        // System.out.print("Tas(int) aprés ajout : ");
+        // g.affiche();
+        // System.out.println(g.poll());
+        // System.out.println(g.poll());
+        // System.out.println(g.poll());
+        // System.out.println(g.poll());
+        // System.out.println(g.poll());
+        // System.out.print("Tas(int) aprés suppression : ");
+        // g.affiche();
         
         // LinkedList<Integer> LL = new LinkedList<Integer>();
         // ArrayDeque<Integer> AD = new ArrayDeque<Integer>();

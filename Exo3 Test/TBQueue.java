@@ -26,24 +26,24 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
         System.out.println("ICIII" + tas.getClass().getSimpleName() + "FINI");
     }
 
-    // //@Override
-    // public Iterator<E> iterator() {
-    //     return new Iterator<E>() {
-    //         private int n = -1;
+    //@Override
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            private int n = -1;
 
-    //         public boolean hasNext() {
-    //             n++;
-    //             return (n < courant);
-    //         }
+            public boolean hasNext() {
+                n++;
+                return (n < courant);
+            }
 
-    //         public E next() {
-    //             return tas[n];
-    //         }
+            public E next() {
+                return tas[n];
+            }
 
-    //         public void remove() {
-    //         }
-    //     };
-    // }
+            public void remove() {
+            }
+        };
+    }
 
     /**
      *
@@ -119,8 +119,12 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             // tas[i] = tmp;
             // i = (i - 1) / 2;
             
-            E[] tmp = tas.set((i-tailleDuTableauAuNiveau(niveauTmp))/2, tas.get(tailleDuTableauAuNiveau(niveauTmp)-i));
-            tmp = tas.set(tailleDuTableauAuNiveau(niveauTmp)-i, tmp);
+            E tmp = tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2];
+            tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2] = tas.get(niveauTmp)[i-tailleDuTableauAuNiveau(niveauTmp)];
+
+
+            // E[] tmp = tas.set((i-tailleDuTableauAuNiveau(niveauTmp))/2, tas.get(tailleDuTableauAuNiveau(niveauTmp)-i));
+            // tmp = tas.set(i-tailleDuTableauAuNiveau(niveauTmp), tmp);
 			i = (i - 1) / 2;
             niveauTmp--;	// On remonte
         }

@@ -104,7 +104,8 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
         int indiceDuFils = (i - tailleDuTableauAuNiveau(niveauTmp));
 
         while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null) {
-            if ((comp.compare((tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
+        	// System.out.println("tas.get(niveauTmp)[indiceDuFils] ->" + tas.get(niveauTmp)[indiceDuFils] + " et tas.get(niveauTmp)[indiceDuFils]" + tas.get(niveauTmp)[indiceDuFils]);
+            if (tas.get(niveauTmp)[indiceDuFils] != null && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null && (comp.compare((tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
                 E tmp = tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)];
                 tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)] = tas.get(niveauTmp)[indiceDuFils];
                 tas.get(niveauTmp)[indiceDuFils] = tmp;

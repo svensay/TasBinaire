@@ -39,6 +39,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        //Exercice 1
         //TEST AVEC UN TAS D'INTEGER
         TBQueue<Integer> t = new TBQueue<Integer>(new Comparator<Integer>() {
             public int compare(Integer x, Integer y) {
@@ -75,6 +76,8 @@ public class Main {
         }
         System.out.println();
 
+        
+        //Exercice 2
         //TEST DE LA METHODE "FILTRE"
         QueueExt<Integer> fil = t.filtre((Integer x) -> x.intValue() >= 1 && x.intValue() <= 5);
         System.out.print("Filre : ");
@@ -118,6 +121,43 @@ public class Main {
         System.out.print("Tas(int) aprés suppression : ");
         g.affiche();
         
+        //Exercice 3
+                TBDQueue<Integer> d = new TBDQueue<Integer>(new Comparator<Integer>() {
+            public int compare(Integer x, Integer y) {
+                return x.compareTo(y);
+            }
+        });
+        System.out.println(d.offer(100));
+        System.out.println(d.offer(19));
+        System.out.println(d.offer(36));
+        System.out.println(d.offer(17));
+        System.out.println(d.offer(3));
+        System.out.println(d.offer(25));
+        System.out.println(d.offer(1));
+        System.out.println(d.offer(2));
+        System.out.println(d.offer(7));
+        System.out.print("Tas(int) aprés ajout : ");
+        d.affiche();
+        for (Integer x:d) {
+            System.out.print(x + " ");
+        }
+        System.out.println("");
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.println(d.poll());
+        System.out.print("Tas(int) aprés suppression : ");
+        d.affiche();
+        
+        //Exercice 4
         LinkedList<Integer> LL = new LinkedList<Integer>();
         ArrayDeque<Integer> AD = new ArrayDeque<Integer>();
         TBQueue<Integer> TBQ = new TBQueue<Integer>(new Comparator<Integer>() {

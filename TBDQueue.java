@@ -5,6 +5,7 @@ import java.lang.*;
 import java.lang.Class.*;
 
 public class TBDQueue<E extends Object> extends AbstractQueue<E>{
+    
     private ArrayList<E[]> tas;
     private Comparator<? super E> comp;
     private int courant = 0;
@@ -125,19 +126,15 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
     }
 
     public E poll(){
-              if(niveau <= 0){
+              if(niveau < 0){
             System.out.println("Vide");
             return null;
         }
         E res = tas.get(0)[0];
         int ind = courant - tailleDuTableauAuNiveau(niveau);
-        System.out.println("ind: " + ind);
         if (ind < 0) {
             ind *= (-1);
         }
-        System.out.println(tas.get(niveau)[ind]);
-        System.out.println("Courant = "+courant);
-        System.out.println("Niveau = "+niveau);
         tas.get(0)[0] = tas.get(niveau)[ind];
         tas.get(niveau)[ind] = null;
         courant--;

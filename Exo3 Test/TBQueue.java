@@ -67,6 +67,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
 		for (int i = 0; i <= niveau; i++) {
 			tmp*=2;
 		}
+        System.out.println("TASFULL: tmp-1: " + (tmp-1) + " ,courant " + courant);
 		return tmp - 1 == courant;
     }
 
@@ -105,8 +106,14 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     	for (int i = 0; i < niveau; i++) {
     		emplacement*=2;
     	}
+
+        System.out.println("emplacement: " + emplacement + " ,courant: " + courant);
     	emplacement-=courant+1;	// On recupere l'indice de l'emplacement libre celui juste apres ou se trouve courant
 
+        if (emplacement < 0) {
+            emplacement *=(-1);
+        }
+        System.out.println(emplacement);
     	(tas.get(niveau))[emplacement] = e;
 
         //tas[courant] = e;
@@ -116,7 +123,16 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
         System.out.println("1TEST-->"+(i-tailleDuTableauAuNiveau(niveauTmp))/2);
         if (niveauTmp-1 >= 0) {
             System.out.println("2TEST-->"+(tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] + "  niveauTmp = " + niveauTmp + ", i = "+i+" tailleDuTableauAu(Niveau) = "+ tailleDuTableauAuNiveau(niveauTmp));
-            System.out.println("3TEST-->"+(tas.get(niveauTmp))[(i - tailleDuTableauAuNiveau(niveauTmp)) * (-1) -1]);    // L'adresse du fils
+            if (i - tailleDuTableauAuNiveau(niveauTmp) < 0) {                
+                System.out.println("3TEST-->"+(tas.get(niveauTmp))[(i - tailleDuTableauAuNiveau(niveauTmp)) * (-1) -1]);    // L'adresse du fils
+            }else{
+                System.out.println("3TEST--> niveauTmp: " + niveauTmp + ", i - tailleDuTableauAuNiveau(niveauTmp)) -1 = " + ((i - tailleDuTableauAuNiveau(niveauTmp) -1)*(-1)));
+                if ((i - tailleDuTableauAuNiveau(niveauTmp)) -1 < 0) {
+                    System.out.println("3TEST-->"+(tas.get(niveauTmp))[((i - tailleDuTableauAuNiveau(niveauTmp)) -1)*(-1)]);    // L'adresse du fils                  
+                }else{
+                    System.out.println("3TEST-->"+(tas.get(niveauTmp))[((i - tailleDuTableauAuNiveau(niveauTmp)) -1)]);    // L'adresse du fils                  
+                }  
+            }
             // && (comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveau)[i - tailleDuTableauAuNiveau(niveauTmp)]) < 0)
         }
         while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] != null) {
@@ -124,25 +140,32 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             int indiceDuFils = i - tailleDuTableauAuNiveau(niveauTmp);
             if (indiceDuFils < 0) {
                 indiceDuFils*=(-1);
+                indiceDuFils--;
+                if (indiceDuFils < 0) {
+                    indiceDuFils*= (-1);
+                }
             }
-            System.out.println("3.5TEST-->indiceDuFils-1 = " + (indiceDuFils-1));
-            System.out.println("4TEST-->" + tas.get(niveauTmp)[indiceDuFils-1]);
-            if ((comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils-1]) < 0)) {
+            System.out.println("3.5TEST-->indiceDuFils-1 = " + (indiceDuFils));
+            System.out.println("4TEST-->" + tas.get(niveauTmp)[indiceDuFils]);
+            System.out.println("(tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] -> " + (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] + "\ntas.get(niveauTmp)[indiceDuFils] -> " + tas.get(niveauTmp)[indiceDuFils] + "\ncomp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]) --> " comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]));
+            if ((comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
                 
                 // E tmp = tas[(i - 1) / 2];
                 // tas[(i - 1) / 2] = tas[i];
                 // tas[i] = tmp;
                 // i = (i - 1) / 2;
                 
+                
                 E tmp = tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2];
-                tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2] = tas.get(niveauTmp)[indiceDuFils-1];
+                tas.get(niveauTmp-1)[(i-tailleDuTableauAuNiveau(niveauTmp))/2] = tas.get(niveauTmp)[indiceDuFils];
+                tas.get(niveauTmp)[indiceDuFils] = tmp;
 
 
                 // E[] tmp = tas.set((i-tailleDuTableauAuNiveau(niveauTmp))/2, tas.get(tailleDuTableauAuNiveau(niveauTmp)-i));
                 // tmp = tas.set(i-tailleDuTableauAuNiveau(niveauTmp), tmp);
+            }
     			i = (i - 1) / 2;
                 niveauTmp--;	// On remonte
-            }
         }
         courant++;
         return true;
@@ -292,7 +315,9 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
         System.out.print("[");
         for (int i = 0; i <= niveau; i++) {
         	for (int j = 0; j <  tas.get(i).length; j++) {
-	            System.out.print("\"" + (tas.get(i))[j] + "\" ");   		
+                if ((tas.get(i))[j] != null) {      
+	               System.out.print("\"" + (tas.get(i))[j] + "\" ");   		
+                }
         	}
         }
         System.out.println("]");

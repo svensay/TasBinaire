@@ -16,7 +16,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     private int courant = 0;
     private int max;
 
-    @SuppressWarnings("unchecked")//E extends Object 
+    @SuppressWarnings("unchecked")//"E extends Object" donc on peut cast un tableau Object en tableau de E
     public TBQueue(Comparator<? super E> c, int max) throws ClassCastException {
         comp = c;
         tas = (E[]) new Object[max];
@@ -52,6 +52,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
 
     /**
      *
+     * Ajoute e à la fin de l'arbre puis le remonte a ma bonne place.
      * @param e
      * @return true si ajouter a la queue
      */
@@ -73,7 +74,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     }
 
     /**
-     *
+     *  Enleve la racine, puis place le dernier élément de l'arbre a la racine et le tasmine. 
      * @return la tete de la queue et l'enleve
      */
     public E poll() {
@@ -197,7 +198,9 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
         }
         return acc;
     }
-
+/**
+ * Affiche le Tas
+ */
     public void affiche() {
         if (courant <= 0 || max <= 0) {
             System.out.println("Pas d'élément a afficher");

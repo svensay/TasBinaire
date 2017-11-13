@@ -17,6 +17,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     private int courant = 0;
     private int max;
 
+    @SuppressWarnings("unchecked")//E extends Object 
     public TBQueue(Comparator<? super E> c, int max) throws ClassCastException {
         comp = c;
         // Class<E> aux[];
@@ -163,6 +164,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     //@Override
     public <U> QueueExt<U> map(Function<E, U> f) {
         QueueExt<U> res = new TBQueue<U>(new Comparator<U>() {
+            @SuppressWarnings("unchecked")
             public int compare(U x, U y) {
                 // E tmp;
                 // if ((tmp).isAssignableFrom(x.getClass()) && (tmp).isAssignableFrom(y.getClass()) ) {

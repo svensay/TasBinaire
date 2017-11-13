@@ -18,8 +18,8 @@ public class Main {
     public static int addition(Queue<Integer> q) {
         long debut = System.currentTimeMillis();
         Integer res = 0;
-        for (int i = 0; i < q.size(); i++) {
-            res += q.poll();
+        for (Integer x : q) {
+            res += x;
         }
         //affiche la durée d'exéctuion en milliseconds
         System.out.println(System.currentTimeMillis() - debut + " ms");
@@ -44,7 +44,7 @@ public class Main {
             public int compare(Integer x, Integer y) {
                 return x.compareTo(y);
             }
-        }, 10);
+        }, 20);
         System.out.println(t.offer(2));
         System.out.println(t.offer(6));
         System.out.println(t.offer(20));
@@ -53,6 +53,8 @@ public class Main {
         System.out.println(t.offer(47));
         System.out.println(t.offer(4));
         System.out.println(t.offer(54));
+        System.out.println(t.offer(100));
+        System.out.println(t.offer(110));
         System.out.print("Tas(int) aprés ajout : ");
         t.affiche();
         System.out.println(t.poll());

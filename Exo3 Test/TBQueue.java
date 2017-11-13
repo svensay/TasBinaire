@@ -183,15 +183,18 @@ public class TBQueue<E extends Object> extends AbstractQueue<E>{
             System.out.println("Vide");
             return null;
         }
-        E res = tas.get(niveau)[courant]; 
+        E res = tas.get(0)[0];
+        tas.get(0)[0] = tas.get(niveau)[courant];
+        tas.get(niveau)[courant] = null;
         courant--;
         if(courant < 0){
             niveau--;
+            courant = tas.get(niveau).length-1;
         }
         if((tas.size()-niveau) >= 2){
             tas.remove(tas.size());
         }
-        return tas.get(0)[0];
+        return res;
     }
 
     // /**

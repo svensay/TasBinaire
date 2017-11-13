@@ -88,27 +88,17 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
      */
     @SuppressWarnings("unchecked")//"E extends Object" donc on peut cast un tableau Object
     public boolean offer(E e) {
-        if (tasFull()) { // On recupere la taille du dernier tableau de la liste
+        if (tasFull()) {
             niveau++;
             tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
         }
-
-        int emplacement = 0;    // Pour trouver le dernier emplacement de libre dans la liste de tableau
-/*        for (int i = 0; i < niveau; i++) {
-            emplacement *= 2;
-        }
-
-        emplacement -= courant + 1; // On recupere l'indice de l'emplacement libre celui juste apres ou se trouve courant
-
-        if (emplacement < 0) {
-            emplacement *= (-1);
-        }*/
+        int emplacement = 0;
         while(emplacement < tas.size() && tas.get(niveau)[emplacement] != null){
             emplacement++;
         }
         (tas.get(niveau))[emplacement] = e;
 
-        int niveauTmp = niveau; // pour remonter dans la liste
+        int niveauTmp = niveau;
         courant++;
         int i = courant;
 
@@ -121,7 +111,7 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
                 tas.get(niveauTmp)[indiceDuFils] = tmp;
                 indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
                 i = (i - 1) / 2;
-                niveauTmp--;    // On remonte
+                niveauTmp--;
             } else {
                 break;
             }

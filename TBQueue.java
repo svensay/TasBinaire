@@ -20,7 +20,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     public TBQueue(Comparator<? super E> c, int max) throws ClassCastException {
         comp = c;
         tas = (E[]) new Object[max];
-        System.out.println("ICIII" + tas.getClass().getSimpleName() + "FINI");
         this.max = max;
     }
 

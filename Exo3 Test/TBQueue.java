@@ -27,19 +27,24 @@ public class TBQueue<E extends Object> extends AbstractQueue<E>{
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             private int n = -1;
+            private int lvl = 0;
+            private int ind = -1;
 
             public boolean hasNext() {
                 n++;
+                ind++;
                 return (n < courant);
             }
 
             public E next() {
-                // return tas[n];
-                return tas.get(niveau)[n - tailleDuTableauAuNiveau(niveau)];
+                if(ind > tas.get(lvl).length-1){
+                    lvl++;
+                    ind = 0;
+                }
+                return tas.get(lvl)[ind];
             }
 
-            public void remove() {
-            }
+            public void remove() {}
         };
     }
 

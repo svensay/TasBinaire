@@ -57,6 +57,10 @@ public class Main {
         System.out.println(t.offer(110));
         System.out.print("Tas(int) aprés ajout : ");
         t.affiche();
+        for (Integer x:t) {
+            System.out.print(x + " ");
+        }
+        System.out.println("");
         // System.out.println(t.poll());
         // System.out.println(t.poll());
         // System.out.println(t.poll());

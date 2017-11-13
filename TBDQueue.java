@@ -93,8 +93,8 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
             tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
         }
 
-        int emplacement = 1;    // Pour trouver le dernier emplacement de libre dans la liste de tableau
-        for (int i = 0; i < niveau; i++) {
+        int emplacement = 0;    // Pour trouver le dernier emplacement de libre dans la liste de tableau
+/*        for (int i = 0; i < niveau; i++) {
             emplacement *= 2;
         }
 
@@ -102,11 +102,15 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
 
         if (emplacement < 0) {
             emplacement *= (-1);
+        }*/
+        while(emplacement < tas.size() && tas.get(niveau)[emplacement] != null){
+            emplacement++;
         }
         (tas.get(niveau))[emplacement] = e;
 
         int niveauTmp = niveau; // pour remonter dans la liste
-        int i = courant + 1;
+        courant++;
+        int i = courant;
 
         int indiceDuFils = (i - tailleDuTableauAuNiveau(niveauTmp));
 
@@ -117,12 +121,11 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
                 tas.get(niveauTmp)[indiceDuFils] = tmp;
                 indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
                 i = (i - 1) / 2;
-                niveauTmp--;	// On remonte
+                niveauTmp--;    // On remonte
             } else {
                 break;
             }
         }
-        courant++;
         return true;
     }
 

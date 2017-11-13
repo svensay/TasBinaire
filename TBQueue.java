@@ -119,6 +119,9 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      * @return la tete de la queue
      */
     public E peek() {
+    	if(courant <= 0){
+    		return null;
+    	}
         return tas[0];
     }
 

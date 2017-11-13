@@ -218,6 +218,9 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
      * @return la tete de la queue
      */
     public E peek() {
+        if(courant <= 0){
+            return null;
+        }
         return tas.get(0)[0];
     }
 

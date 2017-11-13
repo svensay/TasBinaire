@@ -26,10 +26,10 @@ public class Main {
             System.out.print(x + " ");
         }
         System.out.println("");
-        // System.out.println(t.poll());
-        // System.out.println(t.poll());
-        // System.out.println(t.poll());
-        // System.out.print("Tas(int) aprés suppression : ");
-        // t.affiche();
+        System.out.println(t.poll());
+        System.out.println(t.poll());
+        System.out.println(t.poll());
+        System.out.print("Tas(int) aprés suppression : ");
+        t.affiche();
     }
 }

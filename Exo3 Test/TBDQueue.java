@@ -130,15 +130,60 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
             return null;
         }
         E res = tas.get(0)[0];
-        tas.get(0)[0] = tas.get(niveau)[courant];
-        tas.get(niveau)[courant] = null;
+        int ind = courant - tailleDuTableauAuNiveau(niveau);
+        System.out.println("ind: " + ind);
+        if (ind < 0) {
+            ind *= (-1);
+        }
+        System.out.println(tas.get(niveau)[ind]);
+        System.out.println("Courant = "+courant);
+        System.out.println("Niveau = "+niveau);
+        tas.get(0)[0] = tas.get(niveau)[ind];
+        tas.get(niveau)[ind] = null;
         courant--;
-        if(courant < 0){
+        ind--;
+        if(ind < 0){
             niveau--;
-            courant = tas.get(niveau).length-1;
         }
         if((tas.size()-niveau) >= 2){
-            tas.remove(tas.size());
+            tas.remove(tas.size()-1);
+        }
+        int pere = 0;
+        int lvl = 0;
+        while (lvl < niveau && (tas.get(lvl+1)[2 * pere] != null || tas.get(lvl+1)[(2 * pere) + 1] != null)) {
+            E tmp = tas.get(lvl)[pere];
+
+            if ((tas.get(lvl+1)[2 * pere] != null && tas.get(lvl+1)[(2 * pere) + 1] == null)) {
+                if (comp.compare(tas.get(lvl+1)[2 * pere], tas.get(lvl)[pere]) > 0) {
+                    tas.get(lvl)[pere] = tas.get(lvl+1)[2 * pere];
+                    tas.get(lvl+1)[2 * pere] = tmp;
+                    pere = 2 * pere;
+                    lvl++;
+                } else {
+                    break;
+                }
+            } else if ((tas.get(lvl+1)[2 * pere] == null && tas.get(lvl+1)[(2 * pere) + 1] != null)) {
+                if (comp.compare(tas.get(lvl+1)[(2 * pere) + 1], tas.get(lvl)[pere]) > 0) {
+                    tas.get(lvl)[pere] = tas.get(lvl+1)[(2 * pere) + 1];
+                    tas.get(lvl+1)[(2 * pere) + 1] = tmp;
+                    pere = (2 * pere) + 1;
+                    lvl++;
+                } else {
+                    break;
+                }
+            } else {
+                if (comp.compare(tas.get(lvl+1)[2 * pere], tas.get(lvl+1)[(2 * pere) + 1]) > 0) {
+                    tas.get(lvl)[pere] = tas.get(lvl+1)[2 * pere];
+                    tas.get(lvl+1)[2 * pere] = tmp;
+                    pere = (2 * pere);
+                    lvl++;
+                } else {
+                    tas.get(lvl)[pere] = tas.get(lvl+1)[(2 * pere) + 1];
+                    tas.get(lvl+1)[(2 * pere) + 1] = tmp;
+                    pere = (2 * pere) + 1;
+                    lvl++;
+                }
+            }
         }
         return res;
     }

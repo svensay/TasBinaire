@@ -45,16 +45,15 @@ public class Main {
                 return x.compareTo(y);
             }
         }, 20);
-        System.out.println(t.offer(2));
-        System.out.println(t.offer(6));
-        System.out.println(t.offer(20));
-        System.out.println(t.offer(85));
-        System.out.println(t.offer(7));
-        System.out.println(t.offer(47));
-        System.out.println(t.offer(4));
-        System.out.println(t.offer(54));
         System.out.println(t.offer(100));
-        System.out.println(t.offer(110));
+        System.out.println(t.offer(19));
+        System.out.println(t.offer(36));
+        System.out.println(t.offer(17));
+        System.out.println(t.offer(3));
+        System.out.println(t.offer(25));
+        System.out.println(t.offer(1));
+        System.out.println(t.offer(2));
+        System.out.println(t.offer(7));
         System.out.print("Tas(int) aprés ajout : ");
         t.affiche();
         System.out.println(t.poll());

@@ -59,13 +59,6 @@ public class Main {
         t.affiche();
         System.out.println(t.poll());
         System.out.println(t.poll());
-        System.out.println(t.poll());
-        System.out.println(t.poll());
-        System.out.println(t.poll());
-        System.out.println(t.poll());
-        System.out.println(t.poll());
-        System.out.println(t.poll());
-        System.out.println(t.poll());
         System.out.print("Tas(int) aprés suppression : ");
         t.affiche();
 
@@ -88,6 +81,10 @@ public class Main {
         //TEST DE LA METHODE "MAP"
         QueueExt<Integer> map = t.map((Integer x) -> {
             return x + 5;
+        },new Comparator<Integer>() {
+            public int compare(Integer x, Integer y) {
+                return x.compareTo(y);
+            }
         });
         System.out.print("Map : ");
         for (Object x : map) {
@@ -150,9 +147,6 @@ public class Main {
         System.out.println(d.poll());
         System.out.println(d.poll());
         System.out.println(d.poll());
-        System.out.println(d.poll());
-        System.out.println(d.poll());
-        System.out.println(d.poll());
         System.out.print("Tas(int) aprés suppression : ");
         d.affiche();
 
@@ -164,11 +158,17 @@ public class Main {
                     compare(Integer x, Integer y) {
                 return x.compareTo(y);
             }
-        }, 1000000);
+        }, 1000000);       
+        TBDQueue<Integer> TBDQ = new TBDQueue<Integer>(new Comparator<Integer>() {
+            public int compare(Integer x, Integer y) {
+                return x.compareTo(y);
+            }
+        });
         for (int i = 0; i < 1000000; i++) {
             LL.add(i);
             AD.add(i);
             TBQ.add(i);
+            TBDQ.offer(i);
         }
         System.out.println("Temps d'éxecution pour LinkedList<Integer> : ");
         System.out.print("Carre = ");
@@ -190,6 +190,13 @@ public class Main {
         System.out.print("Addition = ");
         addition(TBQ);
         System.out.print("haveFive = ");
-        haveFive(TBQ);
+        haveFive(TBQ);      
+        System.out.println("Temps d'éxecution pour TBDQueue<Integer> : ");
+        System.out.print("Carre = ");
+        carree(TBDQ);
+        System.out.print("Addition = ");
+        addition(TBDQ);
+        System.out.print("haveFive = ");
+        haveFive(TBDQ);
     }
 }

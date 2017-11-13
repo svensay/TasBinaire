@@ -61,7 +61,6 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
         for (int i = 0; i <= niveau; i++) {
             tmp *= 2;
         }
-        // System.out.println("TASFULL: tmp-1: " + (tmp-1) + " ,courant " + courant);
         return tmp - 1 == courant;
     }
 
@@ -189,7 +188,6 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
      */
     public E peek() {
         return tas.get(0)[0];
-        // return tas[0];
     }
 
     /**

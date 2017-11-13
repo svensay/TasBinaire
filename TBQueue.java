@@ -5,12 +5,6 @@ import java.lang.*;
 import java.lang.Class.*;
 
 public class TBQueue<E extends Object> extends AbstractQueue<E> implements QueueExt<E> {
-
-    /*
-      Racine indice 0
-      fils gauche de l'indice i => 2i+1 et son fils droit => 2i+2
-      i > 0 pere gauche => i-1/2
-     */
     private E[] tas;
     private Comparator<? super E> comp;
     private int courant = 0;
@@ -151,20 +145,8 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      * @return une liste dont les éléments sont tous les éléments de tab
      * auxquels on a appliqué la fonction f.
      */
-    public <U> QueueExt<U> map(Function<E, U> f) {
-        QueueExt<U> res = new TBQueue<U>(new Comparator<U>() {
-            @SuppressWarnings("unchecked")
-            public int compare(U x, U y) {
-                // E tmp;
-                // if ((tmp).isAssignableFrom(x.getClass()) && (tmp).isAssignableFrom(y.getClass()) ) {
-                return comp.compare((E) x, (E) y);
-                // }else{
-                // System.out.println("Cast pas possible");
-                // return 0;
-
-                // }
-            }
-        }, max);
+    public <U> QueueExt<U> map(Function<E, U> f,Comparator<? super U> c) {
+        QueueExt<U> res = new TBQueue<U>(c, max);
         for (E x : this) {
             res.offer(f.apply(x));
         }
@@ -198,7 +180,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
         return acc;
     }
 /**
- * Affiche le Tas
+ * Affiche le tas
  */
     public void affiche() {
         if (courant <= 0 || max <= 0) {

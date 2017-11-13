@@ -118,7 +118,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
 
         //tas[courant] = e;
        	int niveauTmp = niveau;	// pour remonter dans la liste
-        int i = courant;
+        int i = courant+1;
         // while (i >= 0 && ((i - 1) / 2) >= 0 && tas[(i - 1) / 2] != null && (comp.compare(tas[(i - 1) / 2], tas[i]) < 0)) {
         System.out.println("1TEST-->"+(i-tailleDuTableauAuNiveau(niveauTmp))/2);
         if (niveauTmp-1 >= 0) {

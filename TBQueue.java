@@ -3,7 +3,6 @@ import java.util.*;
 import java.util.function.*;
 import java.lang.*;
 import java.lang.Class.*;
-//https://docs.oracle.com/javase/7/docs/api/java/lang/Class.html
 
 public class TBQueue<E extends Object> extends AbstractQueue<E> implements QueueExt<E> {
 
@@ -20,15 +19,11 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     @SuppressWarnings("unchecked")//E extends Object 
     public TBQueue(Comparator<? super E> c, int max) throws ClassCastException {
         comp = c;
-        // Class<E> aux[];
-        // Object tmp[] = new Object[max];
-        // tas = tmp.getComponentType();
         tas = (E[]) new Object[max];
         System.out.println("ICIII" + tas.getClass().getSimpleName() + "FINI");
         this.max = max;
     }
 
-    //@Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             private int n = -1;
@@ -51,7 +46,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      *
      * @return le nombre d'element
      */
-    //@Override
     public int size() {
         return courant;
     }
@@ -61,7 +55,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      * @param e
      * @return true si ajouter a la queue
      */
-    //@Override
     public boolean offer(E e) {
         if (courant >= max) {
             System.out.println("Plus de place: nombre élement = " + courant + "; capacité = " + max);
@@ -83,7 +76,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      *
      * @return la tete de la queue et l'enleve
      */
-    //@Override
     public E poll() {
         if (courant <= 0 || max <= 0) {
             System.out.println("Pas de racine");
@@ -132,7 +124,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      *
      * @return la tete de la queue
      */
-    //@Override
     public E peek() {
         return tas[0];
     }
@@ -141,7 +132,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      * @return une nouvelle liste consistant en les éléments de tab qui
      * satisfont le prédicat cond.
      */
-    //@Override
     public QueueExt<E> filtre(Predicate<E> cond) {
         ArrayList<E> tmp = new ArrayList<E>();
         for (E x : this) {
@@ -161,7 +151,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      * @return une liste dont les éléments sont tous les éléments de tab
      * auxquels on a appliqué la fonction f.
      */
-    //@Override
     public <U> QueueExt<U> map(Function<E, U> f) {
         QueueExt<U> res = new TBQueue<U>(new Comparator<U>() {
             @SuppressWarnings("unchecked")
@@ -186,7 +175,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      * @return un optionnel contenant un élément de la liste satisfaisant le
      * prédicat cond, s’il en existe, sinon l’optionnel vide.
      */
-    //@Override
     public Optional<E> trouve(Predicate<E> cond) {
         for (E x : this) {
             if (cond.test(x)) {
@@ -202,7 +190,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      *
      * @return a
      */
-    //@Override
     public <U> U reduit(U z, BiFunction<U, E, U> f) {
         U acc = z;
         for (E x : this) {

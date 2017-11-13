@@ -3,27 +3,20 @@ import java.util.*;
 import java.util.function.*;
 import java.lang.*;
 import java.lang.Class.*;
-//https://docs.oracle.com/javase/7/docs/api/java/lang/Class.html
 
 public class TBDQueue<E extends Object> extends AbstractQueue<E>{
-
-    /*
-      Racine indice 0
-      fils gauche de l'indice i => 2i+1 et son fils droit => 2i+2
-      i > 0 pere gauche => i-1/2
-     */
-	private ArrayList<E[]> tas;
+    private ArrayList<E[]> tas;
     private Comparator<? super E> comp;
     private int courant = 0;
-	private int niveau = 0;
+    private int niveau = 0;
 
+    @SuppressWarnings("unchecked")//E extends Object 
     public TBDQueue(Comparator<? super E> c) throws ClassCastException {
         comp = c;
-		tas = new ArrayList<E[]>();
+        tas = new ArrayList<E[]>();
         tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
     }
 
-    //@Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             private int n = -1;
@@ -52,7 +45,6 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
      *
      * @return le nombre d'element
      */
-    //@Override
     public int size() {
         return courant;
     }
@@ -64,12 +56,12 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
      * @return     retourne un boolean
      */
     public boolean tasFull(){
-		int tmp = 1;
-		for (int i = 0; i <= niveau; i++) {
-			tmp*=2;
-		}
+        int tmp = 1;
+        for (int i = 0; i <= niveau; i++) {
+            tmp*=2;
+        }
         // System.out.println("TASFULL: tmp-1: " + (tmp-1) + " ,courant " + courant);
-		return tmp - 1 == courant;
+        return tmp - 1 == courant;
     }
 
     /**
@@ -80,11 +72,11 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
      * @return     Retourne le nombre d'element que peut contenir ve niveau
      */
     public int tailleDuTableauAuNiveau(int niveauDonne){
-		int taille = 1;
-		for (int i = 0; i < niveauDonne; i++) {
-			taille*=2;
-		}
-    	return taille;
+        int taille = 1;
+        for (int i = 0; i < niveauDonne; i++) {
+            taille*=2;
+        }
+        return taille;
     }
 
     /**
@@ -92,26 +84,26 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
      * @param e
      * @return true si ajouter a la queue
      */
-    //@Override
+    @SuppressWarnings("unchecked")//E extends Object 
     public boolean offer(E e) {
-    	if (tasFull()) { // On recupere la taille du dernier tableau de la liste
-    		niveau++;
-    		tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
-    	}
+        if (tasFull()) { // On recupere la taille du dernier tableau de la liste
+            niveau++;
+            tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
+        }
         
-    	int emplacement = 1;	// Pour trouver le dernier emplacement de libre dans la liste de tableau
-    	for (int i = 0; i < niveau; i++) {
-    		emplacement*=2;
-    	}
+        int emplacement = 1;    // Pour trouver le dernier emplacement de libre dans la liste de tableau
+        for (int i = 0; i < niveau; i++) {
+            emplacement*=2;
+        }
 
-    	emplacement-=courant+1;	// On recupere l'indice de l'emplacement libre celui juste apres ou se trouve courant
+        emplacement-=courant+1; // On recupere l'indice de l'emplacement libre celui juste apres ou se trouve courant
 
         if (emplacement < 0) {
             emplacement *=(-1);
         }
-    	(tas.get(niveau))[emplacement] = e;
+        (tas.get(niveau))[emplacement] = e;
 
-       	int niveauTmp = niveau;	// pour remonter dans la liste
+        int niveauTmp = niveau; // pour remonter dans la liste
         int i = courant+1;
 
         int indiceDuFils = (i - tailleDuTableauAuNiveau(niveauTmp));
@@ -204,7 +196,6 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
      *
      * @return la tete de la queue
      */
-    //@Override
     public E peek() {
         return tas.get(0)[0];
         // return tas[0];

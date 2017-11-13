@@ -59,6 +59,12 @@ public class Main {
         System.out.println(t.poll());
         System.out.println(t.poll());
         System.out.println(t.poll());
+        System.out.println(t.poll());
+        System.out.println(t.poll());
+        System.out.println(t.poll());
+        System.out.println(t.poll());
+        System.out.println(t.poll());
+        System.out.println(t.poll());
         System.out.print("Tas(int) aprés suppression : ");
         t.affiche();
 

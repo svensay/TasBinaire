@@ -84,7 +84,7 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
      * @param e
      * @return true si ajouter a la queue
      */
-    @SuppressWarnings("unchecked")//E extends Object 
+    @SuppressWarnings("unchecked")//E extends Object donc on peut caster Object
     public boolean offer(E e) {
         if (tasFull()) { // On recupere la taille du dernier tableau de la liste
             niveau++;
@@ -187,55 +187,6 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E>{
         }
         return res;
     }
-
-    // /**
-    //  *
-    //  * @return la tete de la queue et l'enleve
-    //  */
-    // //@Override
-    // public E poll() {
-    //     if (courant <= 0 || max <= 0) {
-    //         System.out.println("Pas de racine");
-    //         return null;
-    //     }
-    //     E res = tas[0];
-    //     tas[0] = tas[courant - 1];
-    //     tas[courant - 1] = null;
-    //     courant--;
-    //     int i = 0;
-    //     while (((((2 * i) + 1) < max && tas[(2 * i) + 1] != null)
-    //             || (((2 * i) + 2) < max && tas[(2 * i) + 2] != null))) {
-    //         E tmp = tas[i];
-    //         if ((tas[(2 * i) + 1] != null && tas[(2 * i) + 2] == null)) {
-    //             if (comp.compare(tas[(2 * i) + 1], tas[i]) > 0) {
-    //                 tas[i] = tas[(2 * i) + 1];
-    //                 tas[(2 * i) + 1] = tmp;
-    //                 i = (2 * i) + 1;
-    //             } else {
-    //                 break;
-    //             }
-    //         } else if ((tas[(2 * i) + 1] == null && tas[(2 * i) + 2] != null)) {
-    //             if (comp.compare(tas[(2 * i) + 2], tas[i]) > 0) {
-    //                 tas[i] = tas[(2 * i) + 2];
-    //                 tas[(2 * i) + 2] = tmp;
-    //                 i = (2 * i) + 2;
-    //             } else {
-    //                 break;
-    //             }
-    //         } else {
-    //             if (comp.compare(tas[(2 * i) + 1], tas[(2 * i) + 2]) > 0) {
-    //                 tas[i] = tas[(2 * i) + 1];
-    //                 tas[(2 * i) + 1] = tmp;
-    //                 i = (2 * i) + 1;
-    //             } else {
-    //                 tas[i] = tas[(2 * i) + 2];
-    //                 tas[(2 * i) + 2] = tmp;
-    //                 i = (2 * i) + 2;
-    //             }
-    //         }
-    //     }
-    //     return res;
-    // }
 
     /**
      *

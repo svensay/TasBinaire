@@ -147,7 +147,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             }
             System.out.println("3.5TEST-->indiceDuFils-1 = " + (indiceDuFils));
             System.out.println("4TEST-->" + tas.get(niveauTmp)[indiceDuFils]);
-            System.out.println("(tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] -> " + (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] + "\ntas.get(niveauTmp)[indiceDuFils] -> " + tas.get(niveauTmp)[indiceDuFils] + "\ncomp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]) --> " comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]));
+            System.out.println("(tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] -> " + (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] + "\ntas.get(niveauTmp)[indiceDuFils] -> " + tas.get(niveauTmp)[indiceDuFils] + "\ncomp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]) --> " + comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]));
             if ((comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
                 
                 // E tmp = tas[(i - 1) / 2];
@@ -312,13 +312,15 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             System.out.println("Pas d'élément a afficher");
             return;
         }
+        int tmp = courant;
         System.out.print("[");
-        for (int i = 0; i <= niveau; i++) {
+        for (int i = 0; i < niveau; i++) {
         	for (int j = 0; j <  tas.get(i).length; j++) {
-                if ((tas.get(i))[j] != null) {      
-	               System.out.print("\"" + (tas.get(i))[j] + "\" ");   		
-                }
+                System.out.print("\"" + (tas.get(i))[j] + "\" ");   		
         	}
+        }
+        for (int i = 0;i <= tmp-tas.get(niveau).length; i++) {
+            System.out.print("\"" + (tas.get(niveau))[i] + "\" ");
         }
         System.out.println("]");
     }

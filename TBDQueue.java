@@ -79,12 +79,46 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
         return taille;
     }
 
-    /**
-     *
-     * Enleve la racine, puis place le dernier élément de l'arbre a la racine et le tasmine. 
-     * @param e
-     * @return true si ajouter a la queue
-     */
+    // /**
+    //  *
+    //  * Enleve la racine, puis place le dernier élément de l'arbre a la racine et le tasmine. 
+    //  * @param e
+    //  * @return true si ajouter a la queue
+    //  */
+    // @SuppressWarnings("unchecked")//"E extends Object" donc on peut cast un tableau Object
+    // public boolean offer(E e) {
+    //     if (tasFull()) {
+    //         niveau++;
+    //         tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
+    //     }
+    //     int emplacement = 0;
+    //     while(emplacement < tas.size() && tas.get(niveau)[emplacement] != null){
+    //         emplacement++;
+    //     }
+    //     (tas.get(niveau))[emplacement] = e;
+
+    //     int niveauTmp = niveau;
+    //     courant++;
+    //     int i = courant;
+
+    //     int indiceDuFils = (i - tailleDuTableauAuNiveau(niveauTmp));
+
+    //     while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null) {
+    //     	// System.out.println("tas.get(niveauTmp)[indiceDuFils] ->" + tas.get(niveauTmp)[indiceDuFils] + " et tas.get(niveauTmp)[indiceDuFils]" + tas.get(niveauTmp)[indiceDuFils]);
+    //         if (tas.get(niveauTmp)[indiceDuFils] != null && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null && (comp.compare((tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
+    //             E tmp = tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)];
+    //             tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)] = tas.get(niveauTmp)[indiceDuFils];
+    //             tas.get(niveauTmp)[indiceDuFils] = tmp;
+    //             indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
+    //             i = (i - 1) / 2;
+    //             niveauTmp--;
+    //         } else {
+    //             break;
+    //         }
+    //     }
+    //     return true;
+    // }
+
     @SuppressWarnings("unchecked")//"E extends Object" donc on peut cast un tableau Object
     public boolean offer(E e) {
         if (tasFull()) {
@@ -103,18 +137,14 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
 
         int indiceDuFils = (i - tailleDuTableauAuNiveau(niveauTmp));
 
-        while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null) {
+        while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null && tas.get(niveauTmp)[indiceDuFils] !=  null && comp.compare( tas.get(niveauTmp - 1)[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2], tas.get(niveauTmp)[indiceDuFils] ) < 0) {
         	// System.out.println("tas.get(niveauTmp)[indiceDuFils] ->" + tas.get(niveauTmp)[indiceDuFils] + " et tas.get(niveauTmp)[indiceDuFils]" + tas.get(niveauTmp)[indiceDuFils]);
-            if (tas.get(niveauTmp)[indiceDuFils] != null && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null && (comp.compare((tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
-                E tmp = tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)];
-                tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)] = tas.get(niveauTmp)[indiceDuFils];
-                tas.get(niveauTmp)[indiceDuFils] = tmp;
-                indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
-                i = (i - 1) / 2;
-                niveauTmp--;
-            } else {
-                break;
-            }
+            E tmp = tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)];
+            tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)] = tas.get(niveauTmp)[indiceDuFils];
+            tas.get(niveauTmp)[indiceDuFils] = tmp;
+            indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
+            i = (i - 1) / 2;
+            niveauTmp--;
         }
         return true;
     }
@@ -149,7 +179,7 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
             E tmp = tas.get(lvl)[pere];
 
             if ((tas.get(lvl + 1)[2 * pere] != null && tas.get(lvl + 1)[(2 * pere) + 1] == null)) {
-                if (comp.compare(tas.get(lvl + 1)[2 * pere], tas.get(lvl)[pere]) > 0) {
+                if (tas.get(lvl + 1)[2 * pere] != null && tas.get(lvl)[pere] != null && comp.compare(tas.get(lvl + 1)[2 * pere], tas.get(lvl)[pere]) > 0) {
                     tas.get(lvl)[pere] = tas.get(lvl + 1)[2 * pere];
                     tas.get(lvl + 1)[2 * pere] = tmp;
                     pere = 2 * pere;
@@ -158,7 +188,7 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
                     break;
                 }
             } else if ((tas.get(lvl + 1)[2 * pere] == null && tas.get(lvl + 1)[(2 * pere) + 1] != null)) {
-                if (comp.compare(tas.get(lvl + 1)[(2 * pere) + 1], tas.get(lvl)[pere]) > 0) {
+                if (tas.get(lvl + 1)[(2 * pere) + 1] != null && tas.get(lvl)[pere] != null && comp.compare(tas.get(lvl + 1)[(2 * pere) + 1], tas.get(lvl)[pere]) > 0) {
                     tas.get(lvl)[pere] = tas.get(lvl + 1)[(2 * pere) + 1];
                     tas.get(lvl + 1)[(2 * pere) + 1] = tmp;
                     pere = (2 * pere) + 1;

@@ -174,6 +174,18 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     }
 
     public E poll(){
+              if(niveau <= 0){
+            System.out.println("Vide");
+            return null;
+        }
+        E res = tas.get(niveau)[courant]; 
+        courant--;
+        if(courant < 0){
+            niveau--;
+        }
+        if((tas.size()-niveau) >= 2){
+            tas.remove(tas.size());
+        }
         return tas.get(0)[0];
     }
 
@@ -234,79 +246,6 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
     public E peek() {
         return tas.get(0)[0];
         // return tas[0];
-    }
-
-    // /**
-    //  * @return une nouvelle liste consistant en les éléments de tab qui
-    //  * satisfont le prédicat cond.
-    //  */
-    // //@Override
-    // public QueueExt<E> filtre(Predicate<E> cond) {
-    //     ArrayList<E> tmp = new ArrayList<E>();
-    //     for (E x : this) {
-    //         if (cond.test(x)) {
-    //             tmp.add(x);
-    //         }
-    //     }
-    //     QueueExt<E> res = new TBQueue<E>(comp, tmp.size());
-
-    //     for (E x : tmp) {
-    //         res.offer(x);
-    //     }
-    //     return res;
-    // }
-
-    // /**
-    //  * @return une liste dont les éléments sont tous les éléments de tab
-    //  * auxquels on a appliqué la fonction f.
-    //  */
-    // //@Override
-    // public <U> QueueExt<U> map(Function<E, U> f) {
-    //     QueueExt<U> res = new TBQueue<U>(new Comparator<U>() {
-    //         public int compare(U x, U y) {
-    //             // E tmp;
-    //             // if ((tmp).isAssignableFrom(x.getClass()) && (tmp).isAssignableFrom(y.getClass()) ) {
-    //             return comp.compare((E) x, (E) y);
-    //             // }else{
-    //             // System.out.println("Cast pas possible");
-    //             // return 0;
-
-    //             // }
-    //         }
-    //     }, max);
-    //     for (E x : this) {
-    //         res.offer(f.apply(x));
-    //     }
-    //     return res;
-    // }
-
-    // /**
-    //  * @return un optionnel contenant un élément de la liste satisfaisant le
-    //  * prédicat cond, s’il en existe, sinon l’optionnel vide.
-    //  */
-    // //@Override
-    // public Optional<E> trouve(Predicate<E> cond) {
-    //     for (E x : this) {
-    //         if (cond.test(x)) {
-    //             return Optional.of(x);
-    //         }
-    //     }
-    //     return Optional.empty();
-    // }
-
-    /**
-     * Initialise un accumulateur a avec z, puis, pour chaque élément x de this,
-     * calcule a = f (a, x).
-     *
-     * @return a
-     */
-    //@Override
-    public <U> U reduit(U z, BiFunction<U, E, U> f) {
-        U acc = z;
-        for (E x : this) {
-            acc = f.apply(acc, x);
-        }
-        return acc;
     }
 
     public void affiche() {

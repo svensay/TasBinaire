@@ -314,13 +314,15 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             System.out.println("Pas d'élément a afficher");
             return;
         }
+        int tmp = courant;
         System.out.print("[");
-        for (int i = 0; i <= niveau; i++) {
+        for (int i = 0; i < niveau; i++) {
         	for (int j = 0; j <  tas.get(i).length; j++) {
-                if ((tas.get(i))[j] != null) {      
-	               System.out.print("\"" + (tas.get(i))[j] + "\" ");   		
-                }
+                System.out.print("\"" + (tas.get(i))[j] + "\" ");   		
         	}
+        }
+        for (int i = 0;i <= tmp-tas.get(niveau).length; i++) {
+            System.out.print("\"" + (tas.get(niveau))[i] + "\" ");
         }
         System.out.println("]");
     }

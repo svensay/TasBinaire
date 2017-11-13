@@ -5,7 +5,7 @@ import java.lang.*;
 import java.lang.Class.*;
 //https://docs.oracle.com/javase/7/docs/api/java/lang/Class.html
 
-public class TBQueue<E extends Object> extends AbstractQueue<E> implements QueueExt<E> {
+public class TBQueue<E extends Object> extends AbstractQueue<E>{
 
     /*
       Racine indice 0

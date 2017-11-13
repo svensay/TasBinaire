@@ -135,9 +135,9 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             }
             // && (comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveau)[i - tailleDuTableauAuNiveau(niveauTmp)]) < 0)
         }
-        while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] != null) {
+        while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 ) { // && (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] != null
         	// La formule pour trouver le pere dans une liste de tableau : Pere = (courant-tailleDuTableauAuNiveau(niveau)) / 2; Exemple: courant = 11, tailleDu...(niveau) = 8 -> (11-8)/2 = 1 et 1 etant l'indice dans lequel se trouve le pere dans le niveau au dessus.
-            int indiceDuFils = i - tailleDuTableauAuNiveau(niveauTmp);
+            int indiceDuFils = (i - tailleDuTableauAuNiveau(niveauTmp));
             if (indiceDuFils < 0) {
                 indiceDuFils*=(-1);
                 indiceDuFils--;
@@ -147,7 +147,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
             }
             System.out.println("3.5TEST-->indiceDuFils-1 = " + (indiceDuFils));
             System.out.println("4TEST-->" + tas.get(niveauTmp)[indiceDuFils]);
-            System.out.println("(tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] -> " + (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] + "\ntas.get(niveauTmp)[indiceDuFils] -> " + tas.get(niveauTmp)[indiceDuFils] + "\ncomp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]) --> " comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]));
+            System.out.println("(tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] -> " + (tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2] + "\ntas.get(niveauTmp)[indiceDuFils] -> " + tas.get(niveauTmp)[indiceDuFils] + "\ncomp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]) --> " + comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]));
             if ((comp.compare((tas.get(niveauTmp-1))[(i-tailleDuTableauAuNiveau(niveauTmp))/2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
                 
                 // E tmp = tas[(i - 1) / 2];
@@ -163,9 +163,11 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
 
                 // E[] tmp = tas.set((i-tailleDuTableauAuNiveau(niveauTmp))/2, tas.get(tailleDuTableauAuNiveau(niveauTmp)-i));
                 // tmp = tas.set(i-tailleDuTableauAuNiveau(niveauTmp), tmp);
+            }else{
+                break;
             }
-    			i = (i - 1) / 2;
-                niveauTmp--;	// On remonte
+			i = (i - 1) / 2;
+            niveauTmp--;	// On remonte
         }
         courant++;
         return true;

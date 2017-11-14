@@ -80,6 +80,7 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
         for (int i = 0; i < niveauDonne; i++) {
             taille *= 2;
         }
+        // System.out.println("taille = " + taille);
         return taille;
     }
 
@@ -133,22 +134,23 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
             return false;
         }
         courant++;
-        int indiceDuDernierElement = 0;
-        if (courant - tailleDuTableauAuNiveau(niveau) > 0) {
-            indiceDuDernierElement = courant - tailleDuTableauAuNiveau(niveau);            
-        }
+        int indiceDuDernierElement = courant - tailleDuTableauAuNiveau(niveau);
+        // int indiceDuDernierElement = 0;
+        // if (courant - tailleDuTableauAuNiveau(niveau) > 0) {
+            // indiceDuDernierElement = courant - tailleDuTableauAuNiveau(niveau);            
+        // }
 
+        // System.out.println("indiceDuDernierElement = " + indiceDuDernierElement);
         tas.get(niveau)[indiceDuDernierElement] = e;
-        int i = courant;
         int niveauTmp = niveau;
         int indiceDuFils = indiceDuDernierElement;
-        while (niveauTmp > 0 && i >= 0 && (i / 2) >= 0 && tas.get(niveauTmp-1)[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null && (comp.compare(tas.get(niveauTmp-1)[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
+        while (niveauTmp > 0 && indiceDuFils >= 0 && (indiceDuFils / 2) >= 0 && tas.get(niveauTmp-1)[indiceDuFils / 2] != null && (comp.compare(tas.get(niveauTmp-1)[indiceDuFils / 2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
+            // System.out.println("niveauTmp = " + niveauTmp + " et indiceDuFils = " + indiceDuFils);
             E tmp = tas.get(niveauTmp-1)[indiceDuFils/2];
             tas.get(niveauTmp-1)[indiceDuFils/2] = tas.get(niveauTmp)[indiceDuFils];
-            tas.get(niveauTmp)[i - tailleDuTableauAuNiveau(indiceDuFils)] = tmp;
+            tas.get(niveauTmp)[indiceDuFils] = tmp;
             niveauTmp--;
             indiceDuFils = (indiceDuFils / 2);
-            i = i / 2;
         }
         return true;
     }

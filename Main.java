@@ -242,15 +242,10 @@ public class Main {
 				return x.compareTo(y);
 			}
 		});
-		// for (int i = 0; i < 1; i++) {
-		// 	TBDQT.offer(i);
-		// }
-		// // TBDQT.affiche();
-		
-		// for (Integer x : TBDQT) {
-		// 	System.out.print("\""+x+"\" ");
-		// }	
-		// System.out.println();	
+		for (int i = 0; i < 30; i++) {
+			TBDQT.offer(i);
+		}
+		TBDQT.affiche();
 
 		TBQueue<Integer> TBQT = new TBQueue<Integer>(new Comparator<Integer>() {
 			public int compare(Integer x, Integer y) {

@@ -5,7 +5,7 @@ public class Main {
 
 	public static void ajouter(Queue<Integer> q){
 		long debut = System.currentTimeMillis();
-		for (int i = 0; i < 100000; i++) {
+		for (int i = 0; i < 1000000; i++) {
 			q.add(i);
 		}
 		System.out.println(System.currentTimeMillis() - debut + " ms");

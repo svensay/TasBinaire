@@ -54,12 +54,6 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
      * @return retourne un boolean
      */
     public boolean tasFull() {
-        // int tmp = 1;
-        // for (int i = 0; i <= niveau; i++) {
-        //     tmp *= 2;
-        // }
-        // System.out.println("tmp - 1 ->" + (tmp-1) + " et courant -> "+ courant);
-        // return tmp - 1 == courant;
         for (int i = 0; i < tas.get(tas.size()-1).length; i++) {
             if (tas.get(tas.size()-1)[i] == null) {
                 return false;
@@ -80,51 +74,16 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
         for (int i = 0; i < niveauDonne; i++) {
             taille *= 2;
         }
-        // System.out.println("taille = " + taille);
         return taille;
     }
 
-    // /**
-    //  *
-    //  * Enleve la racine, puis place le dernier élément de l'arbre a la racine et le tasmine. 
-    //  * @param e
-    //  * @return true si ajouter a la queue
-    //  */
-    // @SuppressWarnings("unchecked")//"E extends Object" donc on peut cast un tableau Object
-    // public boolean offer(E e) {
-    //     if (tasFull()) {
-    //         niveau++;
-    //         tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
-    //     }
-    //     int emplacement = 0;
-    //     while(emplacement < tas.size() && tas.get(niveau)[emplacement] != null){
-    //         emplacement++;
-    //     }
-    //     (tas.get(niveau))[emplacement] = e;
-
-    //     int niveauTmp = niveau;
-    //     courant++;
-    //     int i = courant;
-
-    //     int indiceDuFils = (i - tailleDuTableauAuNiveau(niveauTmp));
-
-    //     while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0 && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null) {
-    //     	// System.out.println("tas.get(niveauTmp)[indiceDuFils] ->" + tas.get(niveauTmp)[indiceDuFils] + " et tas.get(niveauTmp)[indiceDuFils]" + tas.get(niveauTmp)[indiceDuFils]);
-    //         if (tas.get(niveauTmp)[indiceDuFils] != null && (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null && (comp.compare((tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
-    //             E tmp = tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)];
-    //             tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)] = tas.get(niveauTmp)[indiceDuFils];
-    //             tas.get(niveauTmp)[indiceDuFils] = tmp;
-    //             indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
-    //             i = (i - 1) / 2;
-    //             niveauTmp--;
-    //         } else {
-    //             break;
-    //         }
-    //     }
-    //     return true;
-    // }
-
-
+    /**
+     *
+     * Enleve la racine, puis place le dernier élément de l'arbre a la racine et le tasmine. 
+     * @param e
+     * @return true si ajouter a la queue
+     */
+    @SuppressWarnings("unchecked")//"E extends Object" donc on peut cast un tableau Object
     public boolean offer(E e) {
         if (tasFull()) {
             niveau++;
@@ -135,17 +94,10 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
         }
         courant++;
         int indiceDuDernierElement = courant - tailleDuTableauAuNiveau(niveau);
-        // int indiceDuDernierElement = 0;
-        // if (courant - tailleDuTableauAuNiveau(niveau) > 0) {
-            // indiceDuDernierElement = courant - tailleDuTableauAuNiveau(niveau);            
-        // }
-
-        // System.out.println("indiceDuDernierElement = " + indiceDuDernierElement);
         tas.get(niveau)[indiceDuDernierElement] = e;
         int niveauTmp = niveau;
         int indiceDuFils = indiceDuDernierElement;
         while (niveauTmp > 0 && indiceDuFils >= 0 && (indiceDuFils / 2) >= 0 && tas.get(niveauTmp-1)[indiceDuFils / 2] != null && (comp.compare(tas.get(niveauTmp-1)[indiceDuFils / 2], tas.get(niveauTmp)[indiceDuFils]) < 0)) {
-            // System.out.println("niveauTmp = " + niveauTmp + " et indiceDuFils = " + indiceDuFils);
             E tmp = tas.get(niveauTmp-1)[indiceDuFils/2];
             tas.get(niveauTmp-1)[indiceDuFils/2] = tas.get(niveauTmp)[indiceDuFils];
             tas.get(niveauTmp)[indiceDuFils] = tmp;
@@ -154,56 +106,6 @@ public class TBDQueue<E extends Object> extends AbstractQueue<E> {
         }
         return true;
     }
-
-
-    // @SuppressWarnings("unchecked")//"E extends Object" donc on peut cast un tableau Object
-    // public boolean offer(E e) {
-    //     if (tasFull()) {
-    //         niveau++;
-    //         System.out.println("Taille du tableau -----> " + tailleDuTableauAuNiveau(niveau));
-    //         tas.add((E[]) new Object[tailleDuTableauAuNiveau(niveau)]);
-    //     }
-    //     int emplacement = 0;
-    //     while(emplacement < tas.size() && tas.get(niveau)[emplacement] != null){
-    //         emplacement++;
-    //     }
-    //     (tas.get(niveau))[emplacement] = e;
-
-    //     int niveauTmp = niveau;
-    //     courant++;
-    //     int i = courant;
-
-    //     int indiceDuFils = (i - tailleDuTableauAuNiveau(niveauTmp));
-
-    //     while (niveauTmp > 0 && i >= 0 && ((i - 1) / 2) >= 0) {
-    //         System.out.println("niveauTmp - 1 = " + (niveauTmp - 1) + " et i = " + i + " et tailleDuTableauAuNiveau(niveauTmp) = " + tailleDuTableauAuNiveau(niveauTmp) + " et (i - tailleDuTableauAuNiveau(niveauTmp)) / 2 = " + (i - tailleDuTableauAuNiveau(niveauTmp)) / 2 + " et indiceDuFils = " + indiceDuFils);
-    //         if( (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] != null && tas.get(niveauTmp)[indiceDuFils] != null && comp.compare( tas.get(niveauTmp - 1)[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2], tas.get(niveauTmp)[indiceDuFils] ) < 0) {
-    //             E tmp = tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)];
-    //             tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)] = tas.get(niveauTmp)[indiceDuFils];
-    //             tas.get(niveauTmp)[indiceDuFils] = tmp;
-    //             indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
-    //             i = (i - 1) / 2;
-    //             niveauTmp--;
-    //         }else if( ( (tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] == null && tas.get(niveauTmp)[indiceDuFils] != null ) ){
-    //             E tmp = tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)];
-    //             tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)] = tas.get(niveauTmp)[indiceDuFils];
-    //             tas.get(niveauTmp)[indiceDuFils] = tmp;         
-    //             indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
-    //             i = (i - 1) / 2;
-    //             niveauTmp--;
-    //         }else if((tas.get(niveauTmp - 1))[(i - tailleDuTableauAuNiveau(niveauTmp)) / 2] == null){
-    //             E tmp = tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)];
-    //             tas.get(niveauTmp - 1)[((i - tailleDuTableauAuNiveau(niveauTmp)) / 2)] = tas.get(niveauTmp)[indiceDuFils];
-    //             tas.get(niveauTmp)[indiceDuFils] = tmp;         
-    //             indiceDuFils = ((i - tailleDuTableauAuNiveau(niveauTmp)) / 2);
-    //             i = (i - 1) / 2;                
-    //             niveauTmp--;
-    //         }else{
-    //             break;
-    //         }
-    //     }
-    //     return true;
-    // }
 
     /**
      * Enleve la racine, puis place le dernier élément de l'arbre a la racine et le tasmine. 

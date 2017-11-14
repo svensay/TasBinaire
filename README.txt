@@ -1,4 +1,4 @@
-Projet réalisé par Sven Say et Marc Bannout du groupe 3.
+﻿Projet réalisé par Sven Say et Marc Bannout du groupe 3.
 
 Conclusion pour l'exercice 4:
 Pour conclure on remarque que le temps d'exécution pour TBDQueue est plus long que celui de TBQueue mais on a pas de limite de taille pour ce dernier.
@@ -6,17 +6,8 @@ TBDQueue; Bien quand on ne veut pas avoir une limite de taille mais lent lors de
 TBQueue; Rapide lors de l'execution mais une limite de taille est imposé.
 
 Pour compiler et exécuter: javac *.java && java Main
-Résultat en fin d'exécution (le programme prend quelques minutes à s'exécuter):
+Résultat en fin d'exécution lors d'une execution a 1million de valeur(le programme prend quelques minutes à s'exécuter):
 $ javac *.java && java Main
-true
-true
-true
-true
-true
-true
-true
-true
-true
 Tas(int) aprés ajout : ["100" , "19" , "36" , "17" , "3" , "25" , "1" , "2" , "7"]
 100
 36
@@ -26,29 +17,15 @@ Filre : 3 2 1
 Map : 30 24 12 22 8 7 6 
 Trouve : Optional[3]
 Reduit : 74
-true
-true
-true
-true
 Tas(int) aprés ajout : ["zb" , "cb" , "bb" , "a"]
 zb
 cb
 bb
 a
-Pas de racine
-null
+Pas de racine = null
 Tas(int) aprés suppression : Pas d'élément a afficher
-true
-true
-true
-true
-true
-true
-true
-true
-true
 Tas(int) aprés ajout : ["100" "19" "36" "17" "3" "25" "1" "2" "7" ]
-100 19 36 17 3 25 1 2 7 
+Test d'iteration (Exo3) : 100 19 36 17 3 25 1 2 7
 100
 36
 25
@@ -87,5 +64,3 @@ Addition = 17 ms
 haveFive = 23 ms
 headSup42 = 0 ms
 Vider = 0 ms
-["29" "21" "28" "16" "20" "24" "27" "9" "15" "17" "19" "13" "23" "25" "26" "0" "6" "3" "14" "2" "8" "7" "18" "1" "10" "5" "22" "4" "12" "11" ]
-["29" , "21" , "28" , "16" , "20" , "24" , "27" , "9" , "15" , "17" , "19" , "13" , "23" , "25" , "26" , "0" , "6" , "3" , "14" , "2" , "8" , "7" , "18" , "1" , "10" , "5" , "22" , "4" , "12" , "11"]

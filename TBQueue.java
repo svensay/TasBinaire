@@ -70,7 +70,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
      */
     public E poll() {
         if (courant <= 0 || max <= 0) {
-            System.out.println("Pas de racine");
+            System.out.print("Pas de racine = ");
             return null;
         }
         E res = tas[0];

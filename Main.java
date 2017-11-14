@@ -5,7 +5,7 @@ public class Main {
 
 	public static void ajouter(Queue<Integer> q){
 		long debut = System.currentTimeMillis();
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			q.add(i);
 		}
 		System.out.println(System.currentTimeMillis() - debut + " ms");
@@ -61,15 +61,15 @@ public class Main {
 				return x.compareTo(y);
 			}
 		}, 20);
-		System.out.println(t.offer(100));
-		System.out.println(t.offer(19));
-		System.out.println(t.offer(36));
-		System.out.println(t.offer(17));
-		System.out.println(t.offer(3));
-		System.out.println(t.offer(25));
-		System.out.println(t.offer(1));
-		System.out.println(t.offer(2));
-		System.out.println(t.offer(7));
+		t.offer(100);
+		t.offer(19);
+		t.offer(36);
+		t.offer(17);
+		t.offer(3);
+		t.offer(25);
+		t.offer(1);
+		t.offer(2);
+		t.offer(7);
 		System.out.print("Tas(int) aprés ajout : ");
 		t.affiche();
 		System.out.println(t.poll());
@@ -118,10 +118,10 @@ public class Main {
 				return x.compareTo(y);
 			}
 		}, 10);
-		System.out.println(g.offer("a"));
-		System.out.println(g.offer("bb"));
-		System.out.println(g.offer("cb"));
-		System.out.println(g.offer("zb"));
+		g.offer("a");
+		g.offer("bb");
+		g.offer("cb");
+		g.offer("zb");
 		System.out.print("Tas(int) aprés ajout : ");
 		g.affiche();
 		System.out.println(g.poll());
@@ -138,17 +138,18 @@ public class Main {
 				return x.compareTo(y);
 			}
 		});
-		System.out.println(d.offer(100));
-		System.out.println(d.offer(19));
-		System.out.println(d.offer(36));
-		System.out.println(d.offer(17));
-		System.out.println(d.offer(3));
-		System.out.println(d.offer(25));
-		System.out.println(d.offer(1));
-		System.out.println(d.offer(2));
-		System.out.println(d.offer(7));
+		d.offer(100);
+		d.offer(19);
+		d.offer(36);
+		d.offer(17);
+		d.offer(3);
+		d.offer(25);
+		d.offer(1);
+		d.offer(2);
+		d.offer(7);
 		System.out.print("Tas(int) aprés ajout : ");
-		d.affiche();
+		d.affiche();//TEST D'ITERATION
+		System.out.print("Test d'iteration (Exo3) : ");
 		for (Integer x : d) {
 			System.out.print(x + " ");
 		}
@@ -230,27 +231,6 @@ public class Main {
 		System.out.print("headSup42 = ");
 		headSup42(TBDQ);
 		System.out.print("Vider = ");
-		vider(LL);   
-
-
-		TBDQueue<Integer> TBDQT = new TBDQueue<Integer>(new Comparator<Integer>() {
-			public int compare(Integer x, Integer y) {
-				return x.compareTo(y);
-			}
-		});
-		for (int i = 0; i < 30; i++) {
-			TBDQT.offer(i);
-		}
-		TBDQT.affiche();
-
-		TBQueue<Integer> TBQT = new TBQueue<Integer>(new Comparator<Integer>() {
-			public int compare(Integer x, Integer y) {
-				return x.compareTo(y);
-			}
-		},30);
-		for (int i = 0; i < 30; i++) {
-			TBQT.offer(i);
-		}
-		TBQT.affiche();
+		vider(LL); 
 	}
 }

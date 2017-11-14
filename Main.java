@@ -1,5 +1,4 @@
 
-import java.util.function.*;
 import java.util.*;
 
 public class Main {
@@ -236,5 +235,26 @@ public class Main {
 		headSup42(TBDQ);
 		System.out.print("Vider = ");
 		vider(LL);   
+
+
+		TBDQueue<Integer> TBDQT = new TBDQueue<Integer>(new Comparator<Integer>() {
+			public int compare(Integer x, Integer y) {
+				return x.compareTo(y);
+			}
+		});
+		for (int i = 0; i < 30; i++) {
+			TBDQT.offer(i);
+		}
+		TBDQT.affiche();		
+
+		TBQueue<Integer> TBQT = new TBQueue<Integer>(new Comparator<Integer>() {
+			public int compare(Integer x, Integer y) {
+				return x.compareTo(y);
+			}
+		},30);
+		for (int i = 0; i < 30; i++) {
+			TBQT.offer(i);
+		}
+		TBQT.affiche();
 	}
 }

@@ -1,8 +1,5 @@
 
 import java.util.*;
-import java.util.function.*;
-import java.lang.*;
-import java.lang.Class.*;
 
 public class TBDQueue<E extends Object> extends AbstractQueue<E> {
 

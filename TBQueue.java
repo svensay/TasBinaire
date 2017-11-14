@@ -1,8 +1,6 @@
 
 import java.util.*;
 import java.util.function.*;
-import java.lang.*;
-import java.lang.Class.*;
 
 public class TBQueue<E extends Object> extends AbstractQueue<E> implements QueueExt<E> {
     private E[] tas;
@@ -80,8 +78,7 @@ public class TBQueue<E extends Object> extends AbstractQueue<E> implements Queue
         tas[courant - 1] = null;
         courant--;
         int i = 0;
-        while (((((2 * i) + 1) < max && tas[(2 * i) + 1] != null)
-                || (((2 * i) + 2) < max && tas[(2 * i) + 2] != null))) {
+        while (((((2 * i) + 1) < max && tas[(2 * i) + 1] != null) || (((2 * i) + 2) < max && tas[(2 * i) + 2] != null))) {
             E tmp = tas[i];
             if ((tas[(2 * i) + 1] != null && tas[(2 * i) + 2] == null)) {
                 if (comp.compare(tas[(2 * i) + 1], tas[i]) > 0) {

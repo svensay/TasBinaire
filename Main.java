@@ -5,7 +5,7 @@ public class Main {
 
 	public static void ajouter(Queue<Integer> q){
 		long debut = System.currentTimeMillis();
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < 100000; i++) {
 			q.add(i);
 		}
 		System.out.println(System.currentTimeMillis() - debut + " ms");
@@ -23,9 +23,7 @@ public class Main {
 		Integer x = 0;
 		for (int i = 0; i < q.size(); i++) {
 			x = q.poll();
-			if (x != null) {
-				q.offer(x * x);
-			}
+			q.offer(x * x);
 		}
         //affiche la durée d'exéctuion en milliseconds
 		System.out.println(System.currentTimeMillis() - debut + " ms");
@@ -35,9 +33,7 @@ public class Main {
 		long debut = System.currentTimeMillis();
 		Integer res = 0;
 		for (Integer x : q) {
-			if(x != null){
-				res += x;
-			}
+			res += x;
 		}
         //affiche la durée d'exéctuion en milliseconds
 		System.out.println(System.currentTimeMillis() - debut + " ms");

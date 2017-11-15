@@ -215,6 +215,12 @@ public class Main {
 				return x.compareTo(y);
 			}
 		});
+		ALTBQueue<Integer> ALTB = new ALTBQueue<Integer>(new Comparator<Integer>() {
+			public int compare(Integer x, Integer y) {
+				return x.compareTo(y);
+			}
+		});
+
 		System.out.println("Temps d'éxecution pour LinkedList<Integer> : ");
 		System.out.print("Ajouter = ");
 		ajouter(LL);        
@@ -253,7 +259,7 @@ public class Main {
 		System.out.print("headSup42 = ");
 		headSup42(TBQ);      
 		System.out.print("Vider = ");
-		vider(LL);       
+		vider(TBQ);       
 		System.out.println("Temps d'éxecution pour TBDQueue<Integer> : ");
 		System.out.print("Ajouter = ");
 		ajouter(TBDQ);
@@ -266,16 +272,7 @@ public class Main {
 		System.out.print("headSup42 = ");
 		headSup42(TBDQ);
 		System.out.print("Vider = ");
-		vider(LL); 
-
-
-        //Exercice 4 facultatif
-		ALTBQueue<Integer> ALTB = new ALTBQueue<Integer>(new Comparator<Integer>() {
-			public int compare(Integer x, Integer y) {
-				return x.compareTo(y);
-			}
-		});
-
+		vider(TBDQ);
 		System.out.println("Temps d'éxecution pour ALTBQueue<Integer> : ");
 		System.out.print("Ajouter = ");
 		ajouter(ALTB);
@@ -288,6 +285,6 @@ public class Main {
 		System.out.print("headSup42 = ");
 		headSup42(ALTB);
 		System.out.print("Vider = ");
-		vider(LL); 
+		vider(ALTB); 
 	}
 }
